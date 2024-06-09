@@ -24,28 +24,23 @@ actionLimitNum = len(random[random['FirstDraw'] >= 15])  # number of households 
 fdaLimit = len(random[random['FirstDraw'] >= 5])  # number of households w lead over 5 ppb, FDA limit in bottled water
 
 # STATISTICS
-# sampleProp = actionLimitNum / len(random)
-# samplePropFDA = fdaLimit / len(random)
-# standardError = math.sqrt((sampleProp*(1-sampleProp))/len(random))
-# standardErrorFDA = math.sqrt((samplePropFDA*(1-sampleProp))/len(random))
-# #
-# posInterval = sampleProp + 1.96*standardError
-# negInterval = sampleProp - 1.96*standardError
-# #
-# print("EPA Action limit")
-# print(sampleProp*100)
-# print(negInterval*100)
-# print(posInterval*100)
-# #
-# posIntervalFDA = samplePropFDA + 1.96*standardErrorFDA
-# negIntervalFDA = samplePropFDA - 1.96*standardErrorFDA
-# #
-# print("Suggested limit")
-# print(samplePropFDA*100)
-# print(negIntervalFDA*100)
-# print(posIntervalFDA*100)
+sampleProp = actionLimitNum / len(random)
+samplePropFDA = fdaLimit / len(random)
+standardError = math.sqrt((sampleProp*(1-sampleProp))/len(random))
+standardErrorFDA = math.sqrt((samplePropFDA*(1-sampleProp))/len(random))
 #
-
-aboveFDA = list(random.loc[random['FirstDraw'] >= 15, 'Address'])
-g = geocoder.google('453 Booth Street, Ottawa ON')
-print(g.latlng)
+posInterval = sampleProp + 1.96*standardError
+negInterval = sampleProp - 1.96*standardError
+#
+print("EPA Action limit")
+print(sampleProp*100)
+print(negInterval*100)
+print(posInterval*100)
+#
+posIntervalFDA = samplePropFDA + 1.96*standardErrorFDA
+negIntervalFDA = samplePropFDA - 1.96*standardErrorFDA
+#
+print("Suggested limit")
+print(samplePropFDA*100)
+print(negIntervalFDA*100)
+print(posIntervalFDA*100)
