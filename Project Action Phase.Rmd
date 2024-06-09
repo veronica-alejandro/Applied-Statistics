@@ -1,0 +1,34 @@
+---
+title: "Project Action Phase"
+author: "Nicholas Rao"
+date: "2024-04-17"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Create Confidence Interval
+Lead <- read.csv("ResultsRandom.csv")
+p <- sum(Lead$FirstDraw>=15)/length(Lead$FirstDraw)
+n=length(Lead$FirstDraw)
+SE=sqrt(p*(1-p)/n)
+lb=p-SE
+ub=p+SE
+print(c(lb,ub))
+
+```
+```{r}
+#Make Visualization
+library(ggplot2)
+library(GGally)
+Lead$Action<-Lead$FirstDraw>=15
+dat=data.frame(cbind(Lead$Action,Lead$FirstDraw))
+colnames(dat)=c("Action","FirstDraw")
+ggplot(dat)+
+  geom_bar(aes(x=Action,y=after_stat(prop)),fill="lightblue")
+
+```
+
